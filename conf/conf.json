@@ -1,0 +1,5 @@
+{
+	"address":"checkins",
+	"http.server.port" : 8080,
+	"checkinsInterval":100  
+}

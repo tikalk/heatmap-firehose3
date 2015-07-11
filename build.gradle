@@ -9,6 +9,7 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'eclipse'
 
+
 version = '3.0.0'
 
 if (!JavaVersion.current().java8Compatible) {

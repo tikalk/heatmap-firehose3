@@ -20,8 +20,12 @@ public class FirehoseVerticle extends AbstractVerticle {
 	private void sendCheckin() {
 		final int i = new Random().nextInt(config().getInteger("maxAddressSeqValue",4700));
 		redis.get("ADDSEQ-" + i , res -> {
-			  if (res.succeeded())
-				  sendCheckin(new Date().getTime() + "@" +res.result());
+			  if (res.succeeded()){
+				  if(res.result()==null)
+					  logger.error("Address is null - Will not send");
+				  else
+					  sendCheckin(new Date().getTime() + "@" +res.result());
+			  }
 			  else
 				  logger.error("Fail to get on Redis",res.cause());
 		});		

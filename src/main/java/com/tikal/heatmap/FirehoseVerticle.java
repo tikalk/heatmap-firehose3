@@ -5,6 +5,7 @@ import java.util.Random;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.redis.RedisClient;
+import io.vertx.redis.RedisOptions;
 
 public class FirehoseVerticle extends AbstractVerticle {
 	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(FirehoseVerticle.class);
@@ -13,7 +14,7 @@ public class FirehoseVerticle extends AbstractVerticle {
 	
 	@Override
 	public void start() throws Exception {
-		redis = RedisClient.create(vertx, config());
+		redis = RedisClient.create(vertx, new RedisOptions(config()));
 		vertx.setPeriodic(config().getInteger("checkinsInterval"),(l) -> sendCheckin());	
 	}
 
